@@ -33,22 +33,21 @@ public class MainActivity extends AppCompatActivity {
         con = Database.mycon();
 
 
-        try {
-            String sql = "SELECT * FROM klient";
-            pst = con.prepareCall(sql);
-            rs = pst.executeQuery();
-            while(rs.next()){
-                System.out.println(rs.getInt("id_klienta"));
-                System.out.println(rs.getString("adres_email"));
-                System.out.println(rs.getString("nr_telefonu"));
-                System.out.println(rs.getFloat("stan_konta"));
+            try {
+                String sql = "SELECT * FROM klient";
+                pst = con.prepareCall(sql);
+                rs = pst.executeQuery();
+                while(rs.next()){
+                    System.out.println(rs.getInt("id_klienta"));
+                    System.out.println(rs.getString("adres_email"));
+                    System.out.println(rs.getString("nr_telefonu"));
+                    System.out.println(rs.getFloat("stan_konta"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
-
-    }
 
     public void openMainMenuActivity(View view){
         Intent intent = new Intent(this, Menu.class);
