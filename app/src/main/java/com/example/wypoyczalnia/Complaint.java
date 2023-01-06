@@ -1,4 +1,4 @@
-package com.example.wypozyczalnia;
+package com.example.wypoyczalnia;
 
 /**
  * A class which represents complaint
