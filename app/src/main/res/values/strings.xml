@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Wypożyczalnia</string>
+    <string name="profile">Profil</string>
+    <string name="moje_przejazdy">Moje przejazdy</string>
+    <string name="rezerwacja">Rezerwacje</string>
+    <string name="pomoc">Kontakt z Obsługą Klienta</string>
 </resources>

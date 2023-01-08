@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/m_profile"
+        android:icon="@drawable/user"
+        android:title="@string/profile"
+        />
+    <item
+        android:id="@+id/m_rides"
+        android:icon="@drawable/bike"
+        android:title="@string/moje_przejazdy"
+        />
+    <item
+        android:id="@+id/m_bookings"
+        android:icon="@drawable/booking"
+        android:title="@string/rezerwacja"
+        />
+    <item  android:title="@string/pomoc">
+
+        <menu>
+            <item
+                android:id="@+id/phone"
+                android:icon="@drawable/phone"
+                android:title="Zadzwoń do nas"
+                />
+            <item
+                android:id="@+id/chat"
+                android:icon="@drawable/help"
+                android:title="Otwórz chat"
+                />
+        </menu>
+    </item>
+</menu>
