@@ -5,6 +5,8 @@ package com.example.wypoyczalnia;
  */
 public abstract class Account {
 
+    public Map map;
+
     /**
      * User id
      */
@@ -41,6 +43,7 @@ public abstract class Account {
         this.accountID = id;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.map = new Map();
         //todo: ENUM
     }
 

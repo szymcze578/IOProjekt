@@ -25,6 +25,25 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ServicemanMapActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".StationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCym5PMx4W8_4eghuZVmQW-lVlNGuePb8Q" />
+
+        <activity
             android:name=".Register"
             android:exported="false">
             <meta-data
@@ -39,7 +58,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MapActivity2"
+            android:name=".CustomerMapActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

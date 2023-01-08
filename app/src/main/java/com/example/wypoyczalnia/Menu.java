@@ -13,6 +13,8 @@ import com.google.android.material.navigation.NavigationView;
 
 public class Menu extends AppCompatActivity {
 
+    private Account user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,8 @@ public class Menu extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setItemIconTintList(null);
+
+        user = new Customer(1, "email", "333");
     }
 
     public void openNavigationMenu(View view){
@@ -30,7 +34,6 @@ public class Menu extends AppCompatActivity {
 
     public void openMapActivity(View view){
 
-        Intent intent = new Intent(this, MapActivity2.class);
-        startActivity(intent);
+        user.map.showMap("Serviceman", view.getContext());
     }
 }

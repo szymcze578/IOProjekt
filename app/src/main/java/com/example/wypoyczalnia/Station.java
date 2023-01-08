@@ -1,6 +1,5 @@
 package com.example.wypoyczalnia;
 
-
 import android.util.Pair;
 
 /**
