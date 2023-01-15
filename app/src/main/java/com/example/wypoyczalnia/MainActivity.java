@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                         if(rs[0].next()){
                             Toast.makeText(MainActivity.this,"your login.....",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, Menu.class);
+
+                            /*Sent username to next activity, user should be created here also.*/
+                            intent.putExtra("Username", us);
                             startActivity(intent);
                         }
                         else {
