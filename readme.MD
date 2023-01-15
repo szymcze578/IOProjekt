@@ -1,5 +1,5 @@
 # Aplikacja webowa obsługi klienta
-[--- Link do aplikacji ---](https://wypozyczalnia-rowerow-io.000webhostapp.com/main)
+[--- Link do aplikacji ---](https://wypozyczalnia-rowerow-io.000webhostapp.com)
 
 W przypadku problemów z dostępem do strony, proszę o kontakt:
 
