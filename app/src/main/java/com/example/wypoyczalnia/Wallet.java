@@ -21,7 +21,7 @@ public class Wallet {
      * Constructor method
      * @param funds total amount of money
      */
-    public Wallet(int funds) {
+    public Wallet(double funds) {
         this.funds = funds;
     }
 
@@ -29,7 +29,7 @@ public class Wallet {
      * A method which sets funds
      * @param funds funds
      */
-    public void setFunds(int funds) {
+    public void setFunds(double funds) {
         this.funds = funds;
     }
 
