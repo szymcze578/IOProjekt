@@ -88,7 +88,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/design_default_color_secondary"
-            android:onClick="openTripSummaryActivity"
+            android:onClick="openCameraActivity"
             android:text="Wypożycz" />
 
         <com.google.android.material.button.MaterialButton

@@ -56,21 +56,7 @@ public class Menu extends AppCompatActivity {
         user.map.showMap("Customer", view.getContext());
     }
 
-    public void openTripSummaryActivity(View view) {
-        // todo: rental method
-        String date = "22.01.2023";
-        int time = 54;
-        int distance = 17;
-        float cost = 27.0f;
 
-
-        Intent i = new Intent(this, tripSummaryActivity.class);
-        i.putExtra("date", date);
-        i.putExtra("time", time);
-        i.putExtra("distance", distance);
-        i.putExtra("cost", cost);
-        startActivity(i);
-    }
 
     public void openDamageReportActivity(View view) {
         startActivity(new Intent(this, ReportDamageActivity.class));
@@ -78,5 +64,11 @@ public class Menu extends AppCompatActivity {
 
     public void showRentalHistory(View view){
         Toast.makeText(this,"Wystąpił błąd - przepraszamy!",Toast.LENGTH_SHORT).show();
+    }
+
+    public void openCameraActivity(View view){
+
+        Intent intent = new Intent(view.getContext(), CameraActivity.class);
+        view.getContext().startActivity(intent);
     }
 }
