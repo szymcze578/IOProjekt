@@ -79,7 +79,7 @@
             android:text="WYŚWIETL MAPE" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/f2"
+            android:id="@+id/rentBTN"
             android:layout_width="300dp"
             android:layout_height="80dp"
             android:layout_below="@+id/loadmapBTN"
@@ -89,13 +89,14 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/design_default_color_secondary"
+            android:onClick="openTripSummaryActivity"
             android:text="Wypożycz" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/f3"
             android:layout_width="300dp"
             android:layout_height="80dp"
-            android:layout_below="@+id/f2"
+            android:layout_below="@+id/rentBTN"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
@@ -115,7 +116,8 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/design_default_color_secondary"
-            android:text="funkcja4" />
+            android:onClick="openDamageReportActivity"
+            android:text="ZGŁOŚ AWARIĘ" />
 
         ></RelativeLayout>
 

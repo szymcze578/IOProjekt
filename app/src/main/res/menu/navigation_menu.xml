@@ -9,8 +9,7 @@
     <item
         android:id="@+id/m_rides"
         android:icon="@drawable/bike"
-        android:title="@string/moje_przejazdy"
-        />
+        android:title="@string/moje_przejazdy" />
     <item
         android:id="@+id/m_bookings"
         android:icon="@drawable/booking"
