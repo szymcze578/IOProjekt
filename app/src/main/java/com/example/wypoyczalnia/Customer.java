@@ -5,6 +5,7 @@ package com.example.wypoyczalnia;
  */
 public class Customer extends Account {
 
+    private Wallet wallet;
     /**
      * Default constructor method
      */
@@ -18,8 +19,17 @@ public class Customer extends Account {
      * @param email customer email
      * @param phoneNumber customer phone number
      */
-    public Customer(int id, String email, String phoneNumber) {
+    public Customer(int id, String email, String phoneNumber, double value) {
         super(id, email, phoneNumber);
+        wallet = new Wallet(value);
+    }
+
+    /**
+     * A method that returns wallet of the user
+     * @return user's wallet
+     */
+    public Wallet getWallet() {
+        return wallet;
     }
 
     /**

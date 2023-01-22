@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Please enter username and password!",Toast.LENGTH_SHORT).show();
                 }else{
                     try {
-
                         String sql = "SELECT * FROM klient WHERE nazwa_uzytkownika=? AND haslo=?";
                         pst[0] = finalCon.prepareCall(sql);
                         pst[0].setString(1,us); //user
@@ -63,16 +64,42 @@ public class MainActivity extends AppCompatActivity {
 
                         rs[0] = pst[0].executeQuery();
                         if(rs[0].next()){
-                            Toast.makeText(MainActivity.this,"your login.....",Toast.LENGTH_SHORT).show();
+
+                            int id = rs[0].getInt(1);
+                            String email = rs[0].getString(2);
+                            String number = rs[0].getString(3);
+                            double wallet = rs[0].getFloat(4);
+
+
+                            Toast.makeText(MainActivity.this,"Logging in...",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(MainActivity.this, Menu.class);
 
                             /*Sent username to next activity, user should be created here also.*/
+                            intent.putExtra("ID", id);
+                            intent.putExtra("email",email);
+                            intent.putExtra("phoneNumber",number);
+                            intent.putExtra("wallet",wallet);
                             intent.putExtra("Username", us);
                             startActivity(intent);
+
                         }
-                        else {
-                            Toast.makeText(MainActivity.this,"your login failed",Toast.LENGTH_SHORT).show();
+                        else if(!rs[0].next()){
+                            String question = "SELECT * FROM serwisanci WHERE nazwa_uzytkownika=? AND haslo=?";
+                            pst[0]  = finalCon.prepareCall(question);
+                            pst[0].setString(1,us);
+                            pst[0].setString(2,ps);
+                            rs[0] = pst[0].executeQuery();
+                            if(rs[0].next()){
+                                Toast.makeText(MainActivity.this,"Logging in as serviceman...",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this, Serviceman_menu.class);
+                                intent.putExtra("Username", us);
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(MainActivity.this,"Failed to log in",Toast.LENGTH_SHORT).show();
+                            }
                         }
+
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 public class Register extends AppCompatActivity {
 
-    EditText username, E_mail, password;
+    EditText username, E_mail, phone_number, password;
     Button register;
 
 
@@ -26,6 +26,7 @@ public class Register extends AppCompatActivity {
         username = findViewById(R.id.username);
         E_mail = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        phone_number = findViewById(R.id.phonenumber);
         register = findViewById(R.id.signupBTN);
 
         Connection con = null;
@@ -39,15 +40,16 @@ public class Register extends AppCompatActivity {
             public void onClick(View view) {
                 String uname = username.getText().toString();
                 String email = E_mail.getText().toString();
+                String phone = phone_number.getText().toString();
                 String pass = password.getText().toString();
 
-                if(email.equals("")||pass.equals("")||uname.equals("")){
+                if(email.equals("")||phone.equals("")||pass.equals("")||uname.equals("")){
                     Toast.makeText(Register.this,"Please enter all information!",Toast.LENGTH_SHORT).show();
                 }else{
                     try{
 
                         final Statement s = finalCon1.createStatement();
-                        s.executeUpdate("INSERT INTO klient (adres_email,haslo,nazwa_uzytkownika) VALUES ('"+email+"','"+pass+"','"+uname+"') ");
+                        s.executeUpdate("INSERT INTO klient (adres_email,nr_telefonu,haslo,nazwa_uzytkownika) VALUES ('"+email+"','"+phone+"','"+pass+"','"+uname+"') ");
 
                         Toast.makeText(Register.this,"Your account created succesfully. Log in Now",Toast.LENGTH_SHORT).show();
 
@@ -57,6 +59,7 @@ public class Register extends AppCompatActivity {
                 }
                 username.setText("");
                 E_mail.setText("");
+                phone_number.setText("");
                 password.setText("");
                 finish();
             }
