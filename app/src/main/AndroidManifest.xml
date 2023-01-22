@@ -27,7 +27,7 @@
             android:name=".tripSummaryActivity"
             android:exported="false" />
         <activity
-            android:name=".technician_menu"
+            android:name=".Serviceman_menu"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
