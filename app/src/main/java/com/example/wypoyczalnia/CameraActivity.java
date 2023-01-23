@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AlertDialog;
@@ -29,8 +31,10 @@ public class CameraActivity extends AppCompatActivity {
 
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private ImageCapture imageCapture;
+    private Customer user;
     PreviewView previewView;
     Button scanButton;
+    EditText text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,10 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
 
+        user = new Customer();
 
         scanButton = findViewById(R.id.scanBTN);
+        text = findViewById(R.id.enterID);
         previewView = findViewById(R.id.previewView);
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
@@ -69,7 +75,8 @@ public class CameraActivity extends AppCompatActivity {
         cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageCapture);
     }
 
-    public void confirmHire(View view) {
+    public void Scan(View view) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Czy na pewno chcesz wypożyczyć ten rower?");
         builder.setCancelable(true);
@@ -78,9 +85,25 @@ public class CameraActivity extends AppCompatActivity {
                 "Tak",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                        Intent intent = new Intent(view.getContext(), CurrentHireActivity.class);
-                        view.getContext().startActivity(intent);
+                        if(text.getText().toString().isEmpty()) {
+                            Toast.makeText(view.getContext(),"Podaj ID roweru",Toast.LENGTH_SHORT).show();
+                            dialog.cancel();
+                        }
+                        else {
+                            int bikeID = Integer.parseInt(text.getText().toString());
+                            if(user.rentBike(bikeID)) {
+                                Toast.makeText(view.getContext(),"Wypożyczono rower",Toast.LENGTH_SHORT).show();
+
+                                dialog.cancel();
+                                Intent intent = new Intent(view.getContext(), CurrentHireActivity.class);
+                                view.getContext().startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(view.getContext(),"Ten rower jest niedostępny",Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+                            }
+                        }
+
                     }
                 });
 

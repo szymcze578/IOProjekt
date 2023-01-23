@@ -93,6 +93,8 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
     public void openCameraActivity(View view){
 
+        boolean x = user.rentBike(3);
+
         Intent intent = new Intent(view.getContext(), CameraActivity.class);
         view.getContext().startActivity(intent);
     }

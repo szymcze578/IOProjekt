@@ -1,5 +1,12 @@
 package com.example.wypoyczalnia;
 
+import android.util.Pair;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * A class which represents customer account
  */
@@ -56,8 +63,28 @@ public class Customer extends Account {
     /**
      * A method by which user can rent a bike
      */
-    void rentBike() {
+    boolean rentBike(int bikeID) {
 
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        con = Database.mycon();
+
+        try {
+            String sql = "SELECT dostepny FROM rower WHERE rower.ID_roweru = " + bikeID;
+            pst = con.prepareCall(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+
+                if(rs.getBoolean("dostepny")) {
+                    //stwórz wypozyczenie
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
