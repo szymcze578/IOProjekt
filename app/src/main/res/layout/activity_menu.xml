@@ -46,10 +46,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_baseline_account_balance_wallet_24"
             android:id="@+id/account"
             android:textColor="@color/white"
             android:background="#30ffffff"
             android:textStyle="bold"
+            android:inputType="numberDecimal"
             android:textSize="20dp"
             android:textAlignment="textEnd"
             android:padding="20dp"
