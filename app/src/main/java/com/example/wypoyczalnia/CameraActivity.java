@@ -42,7 +42,8 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
 
-        user = new Customer();
+        Intent i = getIntent();
+        user = (Customer)i.getSerializableExtra("userObject");
 
         scanButton = findViewById(R.id.scanBTN);
         text = findViewById(R.id.enterID);

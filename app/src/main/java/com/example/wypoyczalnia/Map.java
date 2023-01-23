@@ -6,10 +6,13 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 
+import java.io.Serializable;
+
 /**
  * A class which represents map
  */
-public class Map extends AppCompatActivity {
+@SuppressWarnings("serial")
+public class Map extends AppCompatActivity implements Serializable {
 
     Intent intent;
 

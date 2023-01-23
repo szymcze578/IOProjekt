@@ -1,9 +1,12 @@
 package com.example.wypoyczalnia;
 
+import java.io.Serializable;
+
 /**
  * A class which represents user wallet
  */
-public class Wallet {
+@SuppressWarnings("serial")
+public class Wallet implements Serializable {
 
     /**
      * Current amount of money

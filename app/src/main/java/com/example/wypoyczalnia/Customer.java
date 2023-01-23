@@ -2,6 +2,7 @@ package com.example.wypoyczalnia;
 
 import android.util.Pair;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -78,8 +79,10 @@ public class Customer extends Account {
 
                 if(rs.getBoolean("dostepny")) {
                     //stwórz wypozyczenie
+                    return true;
                 }
-                return true;
+                else
+                    return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();

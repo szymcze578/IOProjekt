@@ -1,9 +1,12 @@
 package com.example.wypoyczalnia;
 
+import java.io.Serializable;
+
 /**
  *   Abstract class which represents user account
  */
-public abstract class Account {
+@SuppressWarnings("serial")
+public abstract class Account implements Serializable {
 
     public Map map;
 
