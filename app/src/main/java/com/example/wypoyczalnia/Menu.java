@@ -64,7 +64,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
            accountRecharge();
         }
         if(id == R.id.m_rides){
-
+            startActivity(new Intent(this, MyRidesActivity.class));
         }
         return true;
     }

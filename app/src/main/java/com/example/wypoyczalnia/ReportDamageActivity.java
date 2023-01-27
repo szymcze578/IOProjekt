@@ -63,7 +63,6 @@ public class ReportDamageActivity extends AppCompatActivity {
             } catch (SQLException e) {
                 Toast.makeText(this,"Wystąpił błąd - przepraszamy!",Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
-
             }
         }
     }
