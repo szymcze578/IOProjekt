@@ -101,7 +101,7 @@ public class ServicemanMapActivity extends AppCompatActivity implements OnMapRea
                     new MarkerOptions()
                             .position(pos)
                             .title("Stacja nr. " + Integer.toString(station.getStationID())).snippet("Uszkodzone rowery: " + station.getFreeSpace())
-                            .icon(icon));
+                            .icon(icon)).setTag(station.getStationID());
 
         }
 
@@ -111,7 +111,12 @@ public class ServicemanMapActivity extends AppCompatActivity implements OnMapRea
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Intent intent = new Intent(this, StationActivity.class);
+        Intent intent = new Intent(this, bikeManagementActivity.class);
+        Object stationNumber = marker.getTag();
+        String sn = stationNumber.toString();
+        Log.d("Station:",sn);
+        Log.d("ID",marker.getId());
+        intent.putExtra("stationNumber",sn);
         startActivity(intent);
     }
 

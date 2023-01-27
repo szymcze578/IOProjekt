@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,6 +20,13 @@
         android:theme="@style/Theme.Wypożyczalnia"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".bikeManagementActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ReportDamageActivity"
             android:exported="false" />
@@ -103,6 +109,9 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+        </activity>
+        <activity android:name=".BikeStatusActivity">
+
         </activity>
     </application>
 

@@ -38,7 +38,6 @@ public class ReportDamageActivity extends AppCompatActivity {
             }
 
 
-
             Date date = Calendar.getInstance().getTime();
 
             Connection con = null;

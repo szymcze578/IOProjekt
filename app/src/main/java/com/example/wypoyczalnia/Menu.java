@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,16 +31,17 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     private Customer user;
     private String username;
 
+    boolean doubletap = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
         //Get logged in user - testing with id number for now
-        user = new Customer(getIntent().getIntExtra("ID",0),
-                getIntent().getStringExtra("email"),
-                getIntent().getStringExtra("phoneNumber"),
-                getIntent().getDoubleExtra("wallet",0.0));
+
+        user = UserHolder.getInstance().getCustomer();
+        username = UserHolder.getInstance().getUsername();
 
         //Set funds label
         TextView wallet = (TextView) findViewById(R.id.account);
@@ -73,7 +75,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
         /* Setting username in slided menu from.*/
         TextView Username = (TextView) navigation.findViewById(R.id.navheader_username);
-        username = getIntent().getStringExtra("Username");
         Username.setText(username);
 
     }
@@ -163,5 +164,22 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         }
     }
 
+    @Override
+    public void onBackPressed(){
+        if(doubletap){
+            super.onBackPressed();
+        }
+        else{
+            Toast.makeText(this, "Naciśnij jeszcze raz by wyłączyć aplikację!", Toast.LENGTH_SHORT).show();
+            doubletap = true;
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubletap = false;
+                }
+            },500);
+        }
+    }
 }
 

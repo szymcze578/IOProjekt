@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 public class tripSummaryActivity extends AppCompatActivity {
 
-
     TextView tripDataLabel;
     TextView tripTimeLabel;
     TextView tripDistanceLabel;
@@ -48,7 +47,9 @@ public class tripSummaryActivity extends AppCompatActivity {
     }
 
     public void returnToMainMenu(View view) {
-        startActivity(new Intent(this, Menu.class));
+        Intent intent = new Intent(this, Menu.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     public void makeAComplaint(View view) {

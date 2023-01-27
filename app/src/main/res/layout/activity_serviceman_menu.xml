@@ -65,6 +65,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/tech_f2"
+            android:onClick="openBikeManagement"
             android:layout_width="300dp"
             android:layout_height="80dp"
             android:layout_below="@+id/tech_loadmapButton"
@@ -74,7 +75,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/design_default_color_secondary"
-            android:text="Zarządzaj stanem technicznym" />
+            android:text="Zarządzaj rowerami" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/tech_f3"
