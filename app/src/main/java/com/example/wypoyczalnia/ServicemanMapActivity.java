@@ -74,7 +74,7 @@ public class ServicemanMapActivity extends AppCompatActivity implements OnMapRea
             rs = pst.executeQuery();
             while(rs.next()){
                 stations.add(
-                        new Station(rs.getInt("id_stacji"),
+                        new Station(rs.getInt("ID_stacji"),
                                 rs.getInt("wolne_miejsca"),
                                 new Pair<> (rs.getDouble("szer geograficzna"),
                                         rs.getDouble("dl geograficzna"))));

@@ -33,6 +33,11 @@ public class Serviceman_menu extends AppCompatActivity {
         Intent intent = new Intent(this, bikeManagementActivity.class);
         startActivity(intent);
     }
+
+    public void openAddBikeActivity(View view){
+        startActivity(new Intent(this, activity_serviceman_addbike.class));
+    }
+
 }
 
 

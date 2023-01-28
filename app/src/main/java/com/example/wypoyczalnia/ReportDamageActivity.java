@@ -43,17 +43,20 @@ public class ReportDamageActivity extends AppCompatActivity {
             Connection con = null;
             con = Database.mycon();
 
+            Customer user = UserHolder.getInstance().getCustomer();
+            int id_klienta = user.getID();
+
             try {
 
-                String sql = "INSERT INTO reklamacje (data, klient_id_klienta, opis, stan_reklamacji, id_wypozyczenia) VALUES (?,?,?,?,?)";
+                String sql = "INSERT INTO awarie (data, klient_id_klienta, opis, stan_awari, rower_ID_roweru) VALUES (?,?,?,?,?)";
 
                 PreparedStatement myStmt = con.prepareStatement(sql);
 
                 myStmt.setString(1, String.valueOf(date)); //date
-                myStmt.setInt(2, 10);   //todo: customerID
+                myStmt.setInt(2, id_klienta);   //todo: customerID
                 myStmt.setString(3, damageDescription); // decription
                 myStmt.setString(4, "Awaria");   //status
-                myStmt.setInt(5,23); //todo: delete after adding table
+                myStmt.setInt(5,1);    //rower_ID_roweru
 
                 myStmt.executeUpdate();
 

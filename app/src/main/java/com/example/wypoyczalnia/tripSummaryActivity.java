@@ -19,6 +19,7 @@ public class tripSummaryActivity extends AppCompatActivity {
     String distance;
     float cost;
     Customer user;
+    Integer hire_id;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -40,6 +41,7 @@ public class tripSummaryActivity extends AppCompatActivity {
             time = extras.getString("time");
             distance = extras.getString("distance");
             cost = extras.getFloat("cost");
+            hire_id = extras.getInt("id_wypozyczenia");
 
             tripDataLabel.setText(date);
             tripTimeLabel.setText(time);
@@ -59,6 +61,7 @@ public class tripSummaryActivity extends AppCompatActivity {
     public void makeAComplaint(View view) {
         Intent i = new Intent(this, ComplaintActivity.class);
         i.putExtra("date", date);
+        i.putExtra("id_wypozyczenia",hire_id);
         startActivity(i);
 
     }

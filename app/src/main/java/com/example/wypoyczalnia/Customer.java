@@ -1,6 +1,7 @@
 package com.example.wypoyczalnia;
 
 import android.util.Pair;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -94,16 +95,14 @@ public class Customer extends Account {
                     hire = new Hire(bikeID);
                     hire.setCustomerID(this.getID());
 
-                    sql = "INSERT INTO `wypozyczenia` (`id_wypozyczenia`, `czas`, `data`, `dystans`, `kwota`, `id_klienta`, `klient_id_klienta`, `id_roweru`, `reklamacje_id_reklamacji`) VALUES (" +
+                    sql = "INSERT INTO `wypozyczenia` (`id_wypozyczenia`, `czas`, `data`, `dystans`, `kwota`, `klient_id_klienta`, `rower_id_roweru`) VALUES (" +
                             "NULL" + ", " + //id_wypozyczenia
                             "NULL" + ", " + //czas
                             "\"" + hire.getDate() + "\"" + ", " + //data
                             "NULL" + ", " + //dystans
                             "NULL" + ", " + //kwota
-                            "NULL" + ", " + //id_klienta
                             this.getID() + ", " + //klient_id_klienta
-                            bikeID + ", " + //id_roweru
-                            "NULL" + //reklamacje_id_reklamacji
+                            bikeID + //id_roweru
                             ");";
 
                     s.executeUpdate(sql);
@@ -113,6 +112,7 @@ public class Customer extends Account {
                     return false;
             }
         } catch (SQLException e) {
+            Toast.makeText(map.getApplicationContext(), String.valueOf(e),Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         return false;

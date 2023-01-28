@@ -23,6 +23,7 @@ public class ComplaintActivity extends AppCompatActivity {
 
     EditText complaintContent;
     String date;
+    int hire_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class ComplaintActivity extends AppCompatActivity {
         complaintContent = (EditText)findViewById(R.id.complaintContent);
         String complaint = String.valueOf(complaintContent.getText());
 
+
         if(complaint.isEmpty()) {
             Toast.makeText(this,"Reklamacja nie może być pusta!",Toast.LENGTH_SHORT).show();
         } else {
@@ -41,24 +43,30 @@ public class ComplaintActivity extends AppCompatActivity {
             if (extras != null) {
                 //todo: add other parameters
                 //example: date = extras.getString("date");
+                 hire_id = extras.getInt("id_wypozyczenia");
             }
 
             Connection con = null;
             con = Database.mycon();
 
             Date date = Calendar.getInstance().getTime();
+            Customer user = UserHolder.getInstance().getCustomer();
+            int id_klienta = user.getID();
+
+
+
 
             try {
 
-                String sql = "INSERT INTO reklamacje (data, klient_id_klienta, opis, stan_reklamacji, id_wypozyczenia) VALUES (?,?,?,?,?)";
+                String sql = "INSERT INTO reklamacje (data, klient_id_klienta, opis, stan_reklamacji, wypozyczenia_id_wypozyczenia) VALUES (?,?,?,?,?)";
 
                 PreparedStatement myStmt = con.prepareStatement(sql);
 
                 myStmt.setString(1, String.valueOf(date)); // date
-                myStmt.setInt(2, 10);   // todo: customer id
+                myStmt.setInt(2, id_klienta);   // todo: customer id
                 myStmt.setString(3, complaint); // complaint description
                 myStmt.setString(4, "Nierozpatrzona");   // complaint status
-                myStmt.setInt(5,23); // todo: rent id
+                myStmt.setInt(5,hire_id); // todo: rent id
 
                 myStmt.executeUpdate();
 
@@ -66,7 +74,7 @@ public class ComplaintActivity extends AppCompatActivity {
 
                 startActivity(new Intent(this, Menu.class));
             } catch (SQLException e) {
-                Toast.makeText(this,"Wystąpił błąd - przepraszamy!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,String.valueOf(e),Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
 
             }

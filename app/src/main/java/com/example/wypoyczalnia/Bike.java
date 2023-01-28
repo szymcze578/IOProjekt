@@ -51,8 +51,16 @@ public class Bike implements Serializable {
      * Parameterized ontructor method
      * @param bikeID bikeID
      */
-    public Bike(int bikeID) {
+    public Bike(Boolean a, int bikeID, int stationID, Pair<Double,Double> coordinates) {
+        this.available = a;
         this.bikeID = bikeID;
+        this.stationID = stationID;
+        this.coordinates = coordinates;
+        //todo: ENUM
+    }
+    public Bike(int BikeID)
+    {
+        this.bikeID = BikeID;
     }
 
     /**

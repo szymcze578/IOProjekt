@@ -96,7 +96,8 @@ public class CurrentHireActivity extends AppCompatActivity{
     public void openTripSummaryActivity() {
         // todo: rental method
         String date = user.getHire().getDate();
-        float cost = (user.getHire().getTime()/60)*0.49f;
+        float cost = (user.getHire().getTime()/10)*0.49f;
+        int hire_id = user.getHire().getHireID();
 
         user.getHire().setPayment(cost);
         user.returnABike();
@@ -106,6 +107,7 @@ public class CurrentHireActivity extends AppCompatActivity{
         i.putExtra("time", time);
         i.putExtra("distance", length);
         i.putExtra("cost", cost);
+        i.putExtra("id_wypozyczenia",hire_id);
 
         i.putExtra("userObject", user);
         startActivity(i);
