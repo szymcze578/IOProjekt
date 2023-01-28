@@ -79,7 +79,7 @@ public class Station {
     }
 
     /**
-     * A method which returns free space
+     * A method which returns number of available bikes
      * @return freeSpace
      */
     public int getAvailableBikes(){
@@ -91,6 +91,31 @@ public class Station {
 
         try {
             String sql = "SELECT COUNT(*) FROM `rower` WHERE dostepny=1 AND stacje_ID_stacji=" + this.getStationID() + ";";
+            pst = con.prepareCall(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    /**
+     * A method which returns number of damaged bikes
+     * @return freeSpace
+     */
+    public int getDamagedBikes(){
+
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        con = Database.mycon();
+
+        try {
+            String sql = "SELECT COUNT(*) FROM `rower` WHERE stan_techniczny != " + "\'sprawny\'" + " AND stacje_ID_stacji=" + this.getStationID() + ";";
             pst = con.prepareCall(sql);
             rs = pst.executeQuery();
             while(rs.next()){
