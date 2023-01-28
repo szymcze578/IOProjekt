@@ -70,10 +70,9 @@ public class Hire implements Serializable {
     public Hire(int bikeID) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        rand = new Random();
-
         date = dtf.format(now);
 
+        rand = new Random();
         bike = new Bike(bikeID);
         bike.setAvailable(false);
         time = 0;

@@ -29,7 +29,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CustomerMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class CustomerMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = CustomerMapActivity.class.getSimpleName();
 
@@ -105,15 +105,6 @@ public class CustomerMapActivity extends AppCompatActivity implements OnMapReady
                             .icon(icon));
 
         }
-
-        googleMap.setOnInfoWindowClickListener(this);
-
-    }
-
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-        Intent intent = new Intent(this, StationActivity.class);
-        startActivity(intent);
     }
 
 

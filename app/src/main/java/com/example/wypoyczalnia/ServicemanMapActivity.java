@@ -100,7 +100,7 @@ public class ServicemanMapActivity extends AppCompatActivity implements OnMapRea
             googleMap.addMarker(
                     new MarkerOptions()
                             .position(pos)
-                            .title("Stacja nr. " + Integer.toString(station.getStationID())).snippet("Uszkodzone rowery: " + station.getFreeSpace())
+                            .title("Stacja nr. " + Integer.toString(station.getStationID())).snippet("Uszkodzone rowery: " + station.getDamagedBikes())
                             .icon(icon)).setTag(station.getStationID());
 
         }
