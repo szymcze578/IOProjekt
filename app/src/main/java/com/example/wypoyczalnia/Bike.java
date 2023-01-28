@@ -2,10 +2,18 @@ package com.example.wypoyczalnia;
 
 import android.util.Pair;
 
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  * A class which represents a bike
  */
-public class Bike {
+@SuppressWarnings("serial")
+public class Bike implements Serializable {
 
     /**
      * Variable indicating whether bike is available
@@ -41,17 +49,10 @@ public class Bike {
 
     /**
      * Parameterized ontructor method
-     * @param a available
      * @param bikeID bikeID
-     * @param stationID stationID
-     * @param coordinates bike coordinates
      */
-    public Bike(Boolean a, int bikeID, int stationID, Pair<Double,Double> coordinates) {
-        this.available = a;
+    public Bike(int bikeID) {
         this.bikeID = bikeID;
-        this.stationID = stationID;
-        this.coordinates = coordinates;
-        //todo: ENUM
     }
 
     /**
@@ -76,6 +77,25 @@ public class Bike {
      */
     public void setAvailable(Boolean a){
         this.available = a;
+        int x = a ? 1 : 0;
+        Connection con = null;
+        String sql = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        Statement s = null;
+        con = Database.mycon();
+
+        sql = "UPDATE `rower` SET `dostepny` = " + x + " WHERE `rower`.`ID_roweru` = " + this.bikeID + ";";
+
+        try{
+            s = con.createStatement();
+            s.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     /**

@@ -2,6 +2,11 @@ package com.example.wypoyczalnia;
 
 import android.util.Pair;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * A class which represents bike station
  */
@@ -71,6 +76,31 @@ public class Station {
      */
     public int getFreeSpace(){
         return this.freeSpace;
+    }
+
+    /**
+     * A method which returns free space
+     * @return freeSpace
+     */
+    public int getAvailableBikes(){
+
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        con = Database.mycon();
+
+        try {
+            String sql = "SELECT COUNT(*) FROM `rower` WHERE dostepny=1 AND stacje_ID_stacji=" + this.getStationID() + ";";
+            pst = con.prepareCall(sql);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     /**

@@ -38,6 +38,8 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        // user = (Customer)getIntent().getSerializableExtra("userObject");
+
         //Get logged in user - testing with id number for now
 
         user = UserHolder.getInstance().getCustomer();

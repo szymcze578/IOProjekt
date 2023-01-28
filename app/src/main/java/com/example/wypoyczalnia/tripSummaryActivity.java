@@ -15,9 +15,10 @@ public class tripSummaryActivity extends AppCompatActivity {
     TextView tripDistanceLabel;
     TextView tripCostLabel;
     String date;
-    int time;
-    int distance;
+    String time;
+    String distance;
     float cost;
+    Customer user;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -33,14 +34,16 @@ public class tripSummaryActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //todo: get parameters after adding rental method
+            user = (Customer)getIntent().getSerializableExtra("userObject");
+
             date = extras.getString("date");
-            time = extras.getInt("time");
-            distance = extras.getInt("distance");
+            time = extras.getString("time");
+            distance = extras.getString("distance");
             cost = extras.getFloat("cost");
 
             tripDataLabel.setText(date);
-            tripTimeLabel.setText(time + " min");
-            tripDistanceLabel.setText(distance + " km");
+            tripTimeLabel.setText(time);
+            tripDistanceLabel.setText(distance);
             tripCostLabel.setText(cost + " zł");
 
         }
@@ -48,6 +51,7 @@ public class tripSummaryActivity extends AppCompatActivity {
 
     public void returnToMainMenu(View view) {
         Intent intent = new Intent(this, Menu.class);
+        intent.putExtra("userObject", user);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

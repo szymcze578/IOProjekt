@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * A class which represents customer account
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 public class Customer extends Account {
 
     private Wallet wallet;
+    private Hire hire;
     /**
      * Default constructor method
      */
@@ -30,6 +32,7 @@ public class Customer extends Account {
     public Customer(int id, String email, String phoneNumber, double value) {
         super(id, email, phoneNumber);
         wallet = new Wallet(value);
+        hire = null;
     }
 
     /**
@@ -38,6 +41,14 @@ public class Customer extends Account {
      */
     public Wallet getWallet() {
         return wallet;
+    }
+
+    /**
+     * A method that returns hire of the user
+     * @return user's hire
+     */
+    public Hire getHire() {
+        return hire;
     }
 
     /**
@@ -69,16 +80,33 @@ public class Customer extends Account {
         Connection con = null;
         ResultSet rs = null;
         PreparedStatement pst = null;
+        Statement s = null;
         con = Database.mycon();
 
         try {
             String sql = "SELECT dostepny FROM rower WHERE rower.ID_roweru = " + bikeID;
             pst = con.prepareCall(sql);
+            s = con.createStatement();
             rs = pst.executeQuery();
             while(rs.next()){
 
                 if(rs.getBoolean("dostepny")) {
-                    //stwórz wypozyczenie
+                    hire = new Hire(bikeID);
+                    hire.setCustomerID(this.getID());
+
+                    sql = "INSERT INTO `wypozyczenia` (`id_wypozyczenia`, `czas`, `data`, `dystans`, `kwota`, `id_klienta`, `klient_id_klienta`, `id_roweru`, `reklamacje_id_reklamacji`) VALUES (" +
+                            "NULL" + ", " + //id_wypozyczenia
+                            "NULL" + ", " + //czas
+                            "\"" + hire.getDate() + "\"" + ", " + //data
+                            "NULL" + ", " + //dystans
+                            "NULL" + ", " + //kwota
+                            "NULL" + ", " + //id_klienta
+                            this.getID() + ", " + //klient_id_klienta
+                            bikeID + ", " + //id_roweru
+                            "NULL" + //reklamacje_id_reklamacji
+                            ");";
+
+                    s.executeUpdate(sql);
                     return true;
                 }
                 else
@@ -108,6 +136,21 @@ public class Customer extends Account {
      * A method which returns a rented bike
      */
     void returnABike() {
+        this.hire.endHire(3);
 
+        Connection con = null;
+        Statement s = null;
+        con = Database.mycon();
+        String sql = null;
+
+        try {
+            s = con.createStatement();
+            sql = "UPDATE `wypozyczenia` SET " + "czas = " + hire.getTime() + ", dystans = " + hire.getLength() + ", kwota = " + hire.getPayment() + " WHERE id_wypozyczenia = " + hire.getHireID() + ";";
+
+            s.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        this.hire = null;
     }
 }

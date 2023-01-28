@@ -99,7 +99,7 @@ public class CustomerMapActivity extends AppCompatActivity implements OnMapReady
             googleMap.addMarker(
                     new MarkerOptions()
                             .position(pos)
-                            .title("Stacja nr. " + Integer.toString(station.getStationID())).snippet("Dostępne rowery: " + station.getFreeSpace())
+                            .title("Stacja nr. " + Integer.toString(station.getStationID())).snippet("Dostępne rowery: " + Integer.toString(station.getAvailableBikes()))
                             .icon(icon));
 
         }
