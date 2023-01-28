@@ -1,11 +1,14 @@
 package com.example.wypoyczalnia;
 
+import android.os.Parcelable;
 import android.util.Pair;
+
+import java.io.Serializable;
 
 /**
  * A class which represents a bike
  */
-public class Bike {
+public class Bike implements Serializable {
 
     /**
      * Variable indicating whether bike is available

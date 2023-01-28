@@ -80,6 +80,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     public void openMapActivity(View view){
+
         user.map.showMap("Customer", view.getContext());
     }
 

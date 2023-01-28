@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class bikeManagementActivity extends AppCompatActivity {
 
     private ArrayList<Bike> bikesArray;
+    private Bike bike;
     private RecyclerView recyclerView;
     private String stationNumber;
     private RecyclerAdapter.RecyclerViewClickListener listener;
@@ -50,8 +52,9 @@ public class bikeManagementActivity extends AppCompatActivity {
             @Override
             public void onClick(View V, int position) {
                 Intent intent = new Intent(getApplicationContext(),BikeStatusActivity.class);
-                int number = bikesArray.get(position).getBikeID();
-                intent.putExtra("bikeNumber",String.valueOf(number));
+                bike = new Bike(bikesArray.get(position).getAvailable(),bikesArray.get(position).getBikeID(),
+                        bikesArray.get(position).getBikeID(),null);
+                intent.putExtra("bikeObject", bike);
                 startActivity(intent);
             }
         };
