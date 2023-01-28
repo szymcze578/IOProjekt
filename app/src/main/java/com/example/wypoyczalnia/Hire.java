@@ -1,16 +1,33 @@
 package com.example.wypoyczalnia;
 
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.util.Random;
+import java.util.Timer;
 /**
  * A class which represents bike rent
  */
-public class Hire {
+@SuppressWarnings("serial")
+public class Hire implements Serializable {
+
     /**
-     * Time when hire was made
+     * A rented bike
+     */
+    private Bike bike;
+
+    /**
+     * Total time elapsed in seconds
      */
     private int time;
 
     /**
-     * Total time of the hire
+     * Total distance traveled in meters
      */
     private int length;
 
@@ -27,7 +44,7 @@ public class Hire {
     /**
      * Total amount of money which should be paid for the loan
      */
-    private int payment;
+    private float payment;
 
     /**
      * Date when the hire was made
@@ -35,9 +52,50 @@ public class Hire {
     private String date;
 
     /**
+     * Random number generator for simulating traveled distance
+     */
+    private Random rand;
+
+    /**
      * Default constructor method
      */
     public Hire() {
+
+    }
+
+    /**
+     * Parameterized constructor method
+     * @param bikeID bikeID
+     */
+    public Hire(int bikeID) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        rand = new Random();
+
+        date = dtf.format(now);
+
+        bike = new Bike(bikeID);
+        bike.setAvailable(false);
+        time = 0;
+        length = 0;
+
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        Statement s = null;
+        con = Database.mycon();
+
+        try {
+            String sql = "SELECT MAX(id_wypozyczenia) FROM wypozyczenia;";
+            pst = con.prepareCall(sql);
+            s = con.createStatement();
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                this.setHireID(rs.getInt(1)+1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -127,7 +185,7 @@ public class Hire {
      * A method which sets payment
      * @param payment payment
      */
-    public void setPayment(int payment) {
+    public void setPayment(float payment) {
         this.payment = payment;
     }
 
@@ -135,7 +193,7 @@ public class Hire {
      * A method which returns payment
      * @return payment
      */
-    public int getPayment() {
+    public float getPayment() {
         return this.payment;
     }
 
@@ -161,6 +219,16 @@ public class Hire {
      */
     public void showHire() {
 
+    }
+
+    public void endHire(int stationID) {
+        this.bike.setStationID(stationID);
+        this.bike.setAvailable(true);
+    }
+
+    public void update() {
+        time++;
+        length+=(rand.nextInt(8-3+1) + 3);
     }
 
 }

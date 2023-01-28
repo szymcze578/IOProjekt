@@ -44,7 +44,10 @@ public class MyRidesActivity extends AppCompatActivity {
 
 
         Connection finalCon = con;
-        int id_klienta = 1; // todo: get id from intent
+
+        Customer user = UserHolder.getInstance().getCustomer();
+        int id_klienta = user.getID();
+
         try {
 
 
@@ -59,7 +62,7 @@ public class MyRidesActivity extends AppCompatActivity {
                 String date = rs.getString("data");
                 int time = rs.getInt("czas");
                 int distance = rs.getInt("dystans");
-                int cost = rs.getInt("kwota");
+                Float cost = rs.getFloat("kwota");
 
                 lpResult += ++i + ".\n\n";
                 dateResult += date + "\n\n";

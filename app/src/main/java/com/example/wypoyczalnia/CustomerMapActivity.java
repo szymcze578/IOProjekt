@@ -21,6 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,12 +75,13 @@ public class CustomerMapActivity extends AppCompatActivity implements OnMapReady
             rs = pst.executeQuery();
             while(rs.next()){
                 stations.add(
-                        new Station(rs.getInt("id_stacji"),
+                        new Station(rs.getInt("ID_stacji"),
                                 rs.getInt("wolne_miejsca"),
                                 new Pair<> (rs.getDouble("szer geograficzna"),
                                         rs.getDouble("dl geograficzna"))));
             }
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
 
@@ -99,7 +101,7 @@ public class CustomerMapActivity extends AppCompatActivity implements OnMapReady
             googleMap.addMarker(
                     new MarkerOptions()
                             .position(pos)
-                            .title("Stacja nr. " + Integer.toString(station.getStationID())).snippet("Dostępne rowery: " + station.getFreeSpace())
+                            .title("Stacja nr. " + Integer.toString(station.getStationID())).snippet("Dostępne rowery: " + Integer.toString(station.getAvailableBikes()))
                             .icon(icon));
 
         }

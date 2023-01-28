@@ -1,13 +1,18 @@
 package com.example.wypoyczalnia;
 
-import android.os.Parcelable;
 import android.util.Pair;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * A class which represents a bike
  */
+@SuppressWarnings("serial")
 public class Bike implements Serializable {
 
     /**
@@ -56,6 +61,10 @@ public class Bike implements Serializable {
         this.coordinates = coordinates;
         //todo: ENUM
     }
+    public Bike(int BikeID)
+    {
+        this.bikeID = BikeID;
+    }
 
     /**
      * A method which sets bikeID
@@ -79,6 +88,25 @@ public class Bike implements Serializable {
      */
     public void setAvailable(Boolean a){
         this.available = a;
+        int x = a ? 1 : 0;
+        Connection con = null;
+        String sql = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        Statement s = null;
+        con = Database.mycon();
+
+        sql = "UPDATE `rower` SET `dostepny` = " + x + " WHERE `rower`.`ID_roweru` = " + this.bikeID + ";";
+
+        try{
+            s = con.createStatement();
+            s.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     /**
