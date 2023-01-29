@@ -34,7 +34,6 @@ public class tripSummaryActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            //todo: get parameters after adding rental method
             user = (Customer)getIntent().getSerializableExtra("userObject");
 
             date = extras.getString("date");
