@@ -77,7 +77,7 @@ public class bikeManagementActivity extends AppCompatActivity {
                         new Bike(rs.getBoolean("dostepny"),
                                 rs.getInt("ID_roweru"),
                                 rs.getInt("stacje_ID_stacji"),
-                                        para));
+                                        rs.getString("stan_techniczny")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

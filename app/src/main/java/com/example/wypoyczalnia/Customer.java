@@ -1,5 +1,6 @@
 package com.example.wypoyczalnia;
 
+import android.content.Context;
 import android.util.Pair;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import java.sql.Statement;
 /**
  * A class which represents customer account
  */
-public class Customer extends Account {
+public class Customer extends Account implements Serializable{
 
     private Wallet wallet;
     private Hire hire;
@@ -153,4 +154,35 @@ public class Customer extends Account {
         }
         this.hire = null;
     }
+
+    /**
+     * A method to update funds in database after transaction.
+     */
+    public void updateFoundsInDB(Context context){
+        Connection con = null;
+        con = Database.mycon();
+
+        int ID = getID();
+        double funds = getWallet().getFunds();
+
+        try {
+
+            String sql = "UPDATE klient SET stan_konta=? WHERE id_klienta=?";
+
+            PreparedStatement myStmt = con.prepareStatement(sql);
+
+            myStmt.setDouble(1,funds);
+            myStmt.setInt(2, ID);
+
+            myStmt.executeUpdate();
+
+            Toast.makeText(context,"Twój portfel został zaktualizowany..",Toast.LENGTH_SHORT).show();
+
+        } catch (SQLException e) {
+            Toast.makeText(context,"Wystąpił błąd - przepraszamy!",Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+
+        }
+    }
+
 }

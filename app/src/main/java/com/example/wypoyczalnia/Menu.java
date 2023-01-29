@@ -96,7 +96,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
     public void openCameraActivity(View view){
 
-
         Intent intent = new Intent(view.getContext(), CameraActivity.class);
         intent.putExtra("userObject", user);
         view.getContext().startActivity(intent);
@@ -119,7 +118,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             String value = recharge.getText().toString();
             double income = Double.valueOf(value);
             user.getWallet().addFunds(income);
-            updateFoundsInDB();
+            user.updateFoundsInDB(getApplicationContext());
             resetFunds();
             dialog.dismiss();
         }
@@ -137,35 +136,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         wallet.setText(String.valueOf(dform.format(user.getWallet().getFunds())));
     }
 
-    /**
-     * A method to update funds in database after transaction.
-     */
-    private void updateFoundsInDB(){
-        Connection con = null;
-        con = Database.mycon();
-
-        int ID = user.getID();
-        double funds = user.getWallet().getFunds();
-
-        try {
-
-            String sql = "UPDATE klient SET stan_konta=? WHERE id_klienta=?";
-
-            PreparedStatement myStmt = con.prepareStatement(sql);
-
-            myStmt.setDouble(1,funds);
-            myStmt.setInt(2, ID);
-
-            myStmt.executeUpdate();
-
-            Toast.makeText(this,"Twój portfel został zaktualizowany..",Toast.LENGTH_SHORT).show();
-
-        } catch (SQLException e) {
-            Toast.makeText(this,"Wystąpił błąd - przepraszamy!",Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-
-        }
-    }
 
     @Override
     public void onBackPressed(){

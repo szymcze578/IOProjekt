@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class tripSummaryActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class tripSummaryActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             //todo: get parameters after adding rental method
-            user = (Customer)getIntent().getSerializableExtra("userObject");
+            user = UserHolder.getInstance().getCustomer();
 
             date = extras.getString("date");
             time = extras.getString("time");
@@ -54,6 +55,7 @@ public class tripSummaryActivity extends AppCompatActivity {
     public void returnToMainMenu(View view) {
         Intent intent = new Intent(this, Menu.class);
         intent.putExtra("userObject", user);
+        takeFundsFromUser();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -62,7 +64,13 @@ public class tripSummaryActivity extends AppCompatActivity {
         Intent i = new Intent(this, ComplaintActivity.class);
         i.putExtra("date", date);
         i.putExtra("id_wypozyczenia",hire_id);
+        takeFundsFromUser();
         startActivity(i);
+    }
 
+    public void takeFundsFromUser(){
+        user.getWallet().takeFunds((double)cost);
+        user.updateFoundsInDB(getApplicationContext());
+        Toast.makeText(this,"Pobrano kwote w wysokości: "+ cost +" zł.",Toast.LENGTH_SHORT).show();
     }
 }

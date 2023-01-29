@@ -33,12 +33,8 @@ public class Bike implements Serializable {
     /**
      * Bike condition
      */
-    private Enum condition; //todo: set and get
+    private String condition;
 
-    /**
-     * Bike coordinates
-     */
-    private Pair<Double,Double> coordinates;
 
     /**
      * Default contructor method
@@ -52,13 +48,13 @@ public class Bike implements Serializable {
      * @param a available
      * @param bikeID bikeID
      * @param stationID stationID
-     * @param coordinates bike coordinates
+     * @param condition bike coordinates
      */
-    public Bike(Boolean a, int bikeID, int stationID, Pair<Double,Double> coordinates) {
+    public Bike(Boolean a, int bikeID, int stationID, String condition) {
         this.available = a;
         this.bikeID = bikeID;
         this.stationID = stationID;
-        this.coordinates = coordinates;
+        this.condition = condition;
         //todo: ENUM
     }
     public Bike(int BikeID)
@@ -135,18 +131,18 @@ public class Bike implements Serializable {
 
     /**
      * A method which sets bike coordinates
-     * @param coordinates bike coordinates
+     * @param condition bike coordinates
      */
-    public void setCoordinates(Pair<Double,Double> coordinates) {
-        this.coordinates = coordinates;
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 
     /**
      * A method which returns bike coordinates
      * @return bike coordinates
      */
-    public Pair<Double, Double> getCoordinates() {
-        return this.coordinates;
+    public String getCondition() {
+        return this.condition;
     }
 
 }

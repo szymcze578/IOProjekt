@@ -44,7 +44,7 @@ public class CameraActivity extends AppCompatActivity {
 
         Intent i = getIntent();
 
-        user = UserHolder.getInstance().getCustomer();
+        user = (Customer)i.getSerializableExtra("userObject");
 
         scanButton = findViewById(R.id.scanBTN);
         text = findViewById(R.id.enterID);

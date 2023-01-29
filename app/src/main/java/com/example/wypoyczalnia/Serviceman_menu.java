@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Serviceman_menu extends AppCompatActivity {
 
     private Serviceman serviceman;
     private String serviceman_name;
+    private boolean doubletap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,25 @@ public class Serviceman_menu extends AppCompatActivity {
 
     public void openAddBikeActivity(View view){
         startActivity(new Intent(this, activity_serviceman_addbike.class));
+    }
+
+
+    @Override
+    public void onBackPressed(){
+        if(doubletap){
+            super.onBackPressed();
+        }
+        else{
+            Toast.makeText(this, "Naciśnij jeszcze raz by wyłączyć aplikację!", Toast.LENGTH_SHORT).show();
+            doubletap = true;
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubletap = false;
+                }
+            },500);
+        }
     }
 
 }

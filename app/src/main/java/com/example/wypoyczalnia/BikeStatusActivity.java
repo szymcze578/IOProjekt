@@ -36,7 +36,8 @@ public class BikeStatusActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         bike = (Bike)i.getSerializableExtra("bikeObject");
-
+        status = bike.getCondition();
+        available = bike.getAvailable() ? 1:0;
         number = findViewById(R.id.statusBikeNumber);
         number.setText("Rower nr. "+ bike.getBikeID());
 
@@ -84,6 +85,7 @@ public class BikeStatusActivity extends AppCompatActivity {
 
         }
 
+        finish();
     }
 
     public void checkButton(View view){
