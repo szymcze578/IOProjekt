@@ -4,8 +4,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,17 +29,24 @@ public class CurrentHireActivity extends AppCompatActivity{
     private boolean updateLength;
     private String time;
     private String length;
+    private EditText text;
+    private int endStation;
+    private ArrayList<Integer> availableStations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_hire);
+        text = findViewById(R.id.enterStation);
+
+        getAvailableStations();
 
         lengthLabel = findViewById(R.id.lengthLabel);
         timeLabel = findViewById(R.id.timeLabel);
 
-        Intent i = getIntent();
-        user = (Customer)i.getSerializableExtra("userObject");
+        //Intent i = getIntent();
+        user = UserHolder.getInstance().getCustomer();
+        endStation = user.getHire().getBike().getStationID();
         updateLength = true;
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -41,6 +56,30 @@ public class CurrentHireActivity extends AppCompatActivity{
                 updateHire();
             }
         }, 0, 1000);
+    }
+
+    private void getAvailableStations() {
+
+        availableStations = new ArrayList<>();
+
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        Statement s = null;
+        con = Database.mycon();
+
+        try {
+            String sql = "SELECT ID_stacji from stacje; ";
+            pst = con.prepareCall(sql);
+            s = con.createStatement();
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                availableStations.add(rs.getInt("ID_stacji"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void endHire(View view) {
@@ -53,9 +92,27 @@ public class CurrentHireActivity extends AppCompatActivity{
                 "Tak",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        timer.cancel();
-                        dialog.cancel();
-                        openTripSummaryActivity();
+
+                        String selectedStation = text.getText().toString();
+                        if(!selectedStation.isEmpty()) {
+                            if(availableStations.contains(Integer.parseInt(selectedStation))) {
+                                endStation = Integer.parseInt(selectedStation);
+                                timer.cancel();
+                                dialog.cancel();
+                                openTripSummaryActivity();
+                            }
+                            else {
+                                Toast.makeText(view.getContext(),"Podano nieistniejącą stację.",Toast.LENGTH_SHORT).show();
+                                dialog.cancel();
+                            }
+                        }
+                        else {
+                            timer.cancel();
+                            dialog.cancel();
+                            openTripSummaryActivity();
+                        }
+
+
                     }
                 });
 
@@ -99,7 +156,7 @@ public class CurrentHireActivity extends AppCompatActivity{
         int hire_id = user.getHire().getHireID();
 
         user.getHire().setPayment(cost);
-        user.returnABike();
+        user.returnABike(endStation);
 
         Intent i = new Intent(this, tripSummaryActivity.class);
         i.putExtra("date", date);

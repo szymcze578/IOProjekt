@@ -212,6 +212,13 @@ public class Hire implements Serializable {
         return this.date;
     }
 
+    /**
+     * A method which returns hired bike
+     * @return hire date
+     */
+    public Bike getBike() {
+        return this.bike;
+    }
 
     /**
      * A function which shows information about the hire
@@ -221,7 +228,7 @@ public class Hire implements Serializable {
     }
 
     public void endHire(int stationID) {
-        this.bike.setStationID(stationID);
+        this.bike.changeStationID(stationID);
         this.bike.setAvailable(true);
     }
 
