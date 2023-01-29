@@ -64,11 +64,11 @@ public class MyRidesActivity extends AppCompatActivity {
                 int distance = rs.getInt("dystans");
                 Float cost = rs.getFloat("kwota");
 
-                lpResult += ++i + ".\n\n";
+                lpResult += ++i + ".\n\n\n";
                 dateResult += date + "\n\n";
-                timeResult += time + "\n\n";
-                distanceResult += distance + "\n\n";
-                costResult += cost + " zł\n\n";
+                timeResult += time + "\n\n\n";
+                distanceResult += distance + "\n\n\n";
+                costResult += cost + " zł\n\n\n";
 
             }
 
