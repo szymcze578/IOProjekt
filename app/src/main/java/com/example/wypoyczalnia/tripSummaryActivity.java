@@ -35,7 +35,9 @@ public class tripSummaryActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            user = (Customer)getIntent().getSerializableExtra("userObject");
+
+            //user = (Customer)getIntent().getSerializableExtra("userObject");
+            user = UserHolder.getInstance().getCustomer();
 
             date = extras.getString("date");
             time = extras.getString("time");
