@@ -57,11 +57,11 @@ public class BikeStatusActivity extends AppCompatActivity {
 
         if(radioButtonAvailable.isChecked()){
             available = 1;
-            Toast.makeText(this,"Status roweru: "+ available, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"Status roweru: "+ available, Toast.LENGTH_SHORT).show();
         }
         if(radioButtonUnavailable.isChecked()){
             available = 0;
-            Toast.makeText(this,"Status roweru: "+ available, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"Status roweru: "+ available, Toast.LENGTH_SHORT).show();
         }
 
         Connection con = null;
