@@ -97,7 +97,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
 
 
         Intent intent = new Intent(view.getContext(), CameraActivity.class);
-        intent.putExtra("userObject", user);
+        //intent.putExtra("userObject", user);
         view.getContext().startActivity(intent);
     }
 

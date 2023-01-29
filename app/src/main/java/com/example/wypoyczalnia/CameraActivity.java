@@ -42,7 +42,7 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
 
-        Intent i = getIntent();
+        //Intent i = getIntent();
 
         user = UserHolder.getInstance().getCustomer();
 
