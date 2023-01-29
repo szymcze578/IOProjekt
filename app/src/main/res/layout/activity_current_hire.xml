@@ -25,6 +25,15 @@
             android:layout_height="match_parent"
             android:layout_marginTop="80dp">
 
+            <EditText
+                android:id="@+id/enterStation"
+                android:layout_width="wrap_content"
+                android:layout_height="59dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="550dp"
+                android:ems="10"
+                android:inputType="numberSigned" />
+
             <TextView
                 android:id="@+id/tripDistance9"
                 android:layout_width="178dp"

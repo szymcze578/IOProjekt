@@ -96,7 +96,7 @@ public class CameraActivity extends AppCompatActivity {
 
                                 dialog.cancel();
                                 Intent intent = new Intent(view.getContext(), CurrentHireActivity.class);
-                                intent.putExtra("userObject", user);
+                                //intent.putExtra("userObject", user);
                                 view.getContext().startActivity(intent);
                             }
                             else {

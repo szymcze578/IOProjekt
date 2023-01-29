@@ -60,6 +60,25 @@ public class Bike implements Serializable {
     public Bike(int BikeID)
     {
         this.bikeID = BikeID;
+
+        Connection con = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        Statement s = null;
+        con = Database.mycon();
+
+        try {
+            String sql = "SELECT stacje_ID_stacji FROM rower WHERE ID_roweru = " + bikeID + " ;";
+            pst = con.prepareCall(sql);
+            s = con.createStatement();
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                this.setStationID(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -119,6 +138,30 @@ public class Bike implements Serializable {
      */
     public void setStationID(int id) {
         this.stationID = id;
+    }
+
+    /**
+     * A method which changes stationID in database
+     * @param id stationID
+     */
+    public void changeStationID(int id) {
+        this.stationID = id;
+        Connection con = null;
+        String sql = null;
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        Statement s = null;
+        con = Database.mycon();
+
+        sql = "UPDATE `rower` SET `stacje_ID_stacji` = " + id + " WHERE `rower`.`ID_roweru` = " + this.bikeID + ";";
+
+        try{
+            s = con.createStatement();
+            s.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

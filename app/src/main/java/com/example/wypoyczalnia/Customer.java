@@ -136,8 +136,8 @@ public class Customer extends Account implements Serializable{
     /**
      * A method which returns a rented bike
      */
-    void returnABike() {
-        this.hire.endHire(3);
+    void returnABike(int stationID) {
+        this.hire.endHire(stationID);
 
         Connection con = null;
         Statement s = null;
