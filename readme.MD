@@ -7,6 +7,6 @@ Marta Wójcik - martwoj478@student.polsl.pl
 
 Przykładowe dane logowania:
 
-Nazwa: test
+Nazwa: test_1
 
 Hasło: 123
