@@ -165,7 +165,7 @@ public class CurrentHireActivity extends AppCompatActivity{
         i.putExtra("cost", cost);
         i.putExtra("id_wypozyczenia",hire_id);
 
-        i.putExtra("userObject", user);
+        //i.putExtra("userObject", user);
         startActivity(i);
     }
 }

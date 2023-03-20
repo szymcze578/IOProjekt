@@ -53,7 +53,7 @@ public class activity_serviceman_addbike extends AppCompatActivity {
                 mySTMT.executeUpdate();
 
                 Toast.makeText(this,"rower dodany poprawnie",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this,Serviceman_menu.class));
+                finish();
             }catch (Exception e){
                 Toast.makeText(this,"blad dodanie roweru",Toast.LENGTH_SHORT).show();
                 System.out.println(e);

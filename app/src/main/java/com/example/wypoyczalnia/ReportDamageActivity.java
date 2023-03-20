@@ -68,7 +68,8 @@ public class ReportDamageActivity extends AppCompatActivity {
 
                 Toast.makeText(this,"Awaria zgłoszona!",Toast.LENGTH_SHORT).show();
 
-                startActivity(new Intent(this, Menu.class));
+                //startActivity(new Intent(this, Menu.class));
+                finish();
             } catch (SQLException e) {
                 Toast.makeText(this,"Wystąpił błąd - przepraszamy!",Toast.LENGTH_SHORT).show();
                 e.printStackTrace();

@@ -72,8 +72,9 @@ public class ComplaintActivity extends AppCompatActivity {
                 myStmt.executeUpdate();
 
                 Toast.makeText(this,"Reklamacja złożona!",Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(this, Menu.class));
+                Intent intent = new Intent(this, Menu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             } catch (SQLException e) {
                 Toast.makeText(this, "Wystąpił błąd - przepraszamy!",Toast.LENGTH_SHORT).show();
                 e.printStackTrace();

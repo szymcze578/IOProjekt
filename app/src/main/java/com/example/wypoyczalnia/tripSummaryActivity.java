@@ -55,7 +55,7 @@ public class tripSummaryActivity extends AppCompatActivity {
 
     public void returnToMainMenu(View view) {
         Intent intent = new Intent(this, Menu.class);
-        intent.putExtra("userObject", user);
+        //intent.putExtra("userObject", user);
         takeFundsFromUser();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
